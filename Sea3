@@ -1,6 +1,5 @@
-repeat wait(5) until game:IsLoaded(2)
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
-local Window = OrionLib:MakeWindow({Name = "[🔥RACE เวอร์ชั่นที่ 4] Blox Fruits", IntroText = "SixMa HUB Bata", HidePremium = false, SaveConfig = true, ConfigFolder = "SixMa HUB Bata"})
+local Window = OrionLib:MakeWindow({Name = "[ 🔥NonStop Hub ]", IntroText = " 🔥NonStop Hub ", HidePremium = false, SaveConfig = true, ConfigFolder = "NonStop Hub"})
 
 if not game:IsLoaded() then repeat game.Loaded:Wait() until game:IsLoaded() end
 pcall(function()
@@ -25,19 +24,14 @@ pcall(function()
     end
 end)
 
+---- G ------
+_G.MobAura = true
+_G.Auto_Elite_Hunter = true
 _G.AncientOne_Quest = true
 
-function topos(Pos)
-    Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-    if game.Players.LocalPlayer.Character.Humanoid.Sit == true then game.Players.LocalPlayer.Character.Humanoid.Sit = false end
-    pcall(function() tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance/210, Enum.EasingStyle.Linear),{CFrame = Pos}) end)
-    tween:Play()
-    if Distance <= 250 then
-        tween:Cancel()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
-    end
-   
-end
+
+---c++-------
+
 
 
 local plr = game.Players.LocalPlayer
@@ -120,10 +114,10 @@ require(game.ReplicatedStorage.Util.CameraShaker):Stop()
 spawn(function()
 while wait(.05) do
     pcall(function()
-        if _G.MobAura or _G.Auto_Elite_Hunter then
+        if _G.MobAura and _G.Auto_Elite_Hunter or _G.AncientOne_Quest then
             repeat wait(.01)
                 AttackNoCD()
-            until _G.MobAura == false or not _G.Auto_Elite_Hunter
+            until _G.MobAura == false or not _G.Auto_Elite_Hunter or _G.AncientOne_Quest
         end
     end)
 end
@@ -133,7 +127,7 @@ CombatFrameworkR = require(game:GetService("Players").LocalPlayer.PlayerScripts.
 y = debug.getupvalues(CombatFrameworkR)[2]
 spawn(function()
 game:GetService("RunService").RenderStepped:Connect(function()
-    if _G.MobAura or _G.Auto_Elite_Hunter then
+    if _G.MobAura and _G.Auto_Elite_Hunter or _G.AncientOne_Quest then
         pcall(function()
             CameraShaker:Stop()
             y.activeController.timeToNextAttack = 0
@@ -151,7 +145,7 @@ end)
 end)
 spawn(function()
 game:GetService("RunService").RenderStepped:Connect(function()
-    if _G.MobAura or _G.Auto_Elite_Hunter then
+    if _G.MobAura or _G.Auto_Elite_Hunter or _G.AncientOne_Quest then
         game.Players.LocalPlayer.Character.Stun.Value = 0
         game.Players.LocalPlayer.Character.Humanoid.Sit = false
         game.Players.LocalPlayer.Character.Busy.Value = false
@@ -172,7 +166,7 @@ end)
 
 
 spawn(function()
-if _G.MobAura or _G.Auto_Elite_Hunter then
+if _G.MobAura or _G.Auto_Elite_Hunter or _G.AncientOne_Quest then
     while wait() do
         for i,v in pairs(game:GetService("Workspace")["_WorldOrigin"]:GetChildren()) do
             pcall(function()
@@ -268,12 +262,12 @@ coroutine.wrap(function()
 while task.wait(.1) do
 local ac = CombatFrameworkR.activeController
     if ac and ac.equipped then
-        if _G.MobAura or _G.Auto_Elite_Hunter then
+        if _G.MobAura or _G.Auto_Elite_Hunter or _G.AncientOne_Quest then
             AttackFunction()
-            if _G.MobAura or _G.Auto_Elite_Hunter then
+            if _G.MobAura or _G.Auto_Elite_Hunter or _G.AncientOne_Quest then
                 if tick() - cooldownfastattack > 5 then wait(.9) cooldownfastattack = tick() end
             end
-        elseif _G.MobAura or _G.Auto_Elite_Hunter then
+        elseif _G.MobAura or _G.Auto_Elite_Hunter or _G.AncientOne_Quest then
             if ac.hitboxMagnitude ~= 55 then
                 ac.hitboxMagnitude = 55
             end
@@ -321,7 +315,7 @@ end
 task.spawn(
 function()
 while wait(0) do
-    if  _G.MobAura or _G.Auto_Elite_Hunter then
+    if  _G.MobAura or _G.Auto_Elite_Hunter or _G.AncientOne_Quest then
         if SeraphFrame.activeController then
             -- if v.Humanoid.Health > 0 then
                 SeraphFrame.activeController.timeToNextAttack = 0
@@ -370,7 +364,7 @@ end
 b = tick()
 spawn(function()
 while wait(.2) do
-    if _G.MobAura or _G.Auto_Elite_Hunter then
+    if _G.MobAura or _G.Auto_Elite_Hunter or _G.AncientOne_Quest then
         if b - tick() > 0.99 then
             wait(.2)
             b = tick()
@@ -393,7 +387,7 @@ end)
 k = tick()
 spawn(function()
 while wait(0.059) do
-    if _G.MobAura or _G.Auto_Elite_Hunter then
+    if _G.MobAura or _G.Auto_Elite_Hunter or _G.AncientOne_Quest then
         if k - tick() > 0.99 then
             wait(0)
             k = tick()
@@ -456,6 +450,24 @@ while wait() do
 end
 end)
 
+
+
+
+function topos(Pos)
+    Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+    if game.Players.LocalPlayer.Character.Humanoid.Sit == true then game.Players.LocalPlayer.Character.Humanoid.Sit = false end
+    pcall(function() tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance/210, Enum.EasingStyle.Linear),{CFrame = Pos}) end)
+    tween:Play()
+    if Distance <= 300 then
+        tween:Cancel()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
+    end
+    if _G.StopTween == true then
+        tween:Cancel()
+        _G.T = false
+    end
+end
+
 spawn(function()
     while wait() do
         if _G.MobAura then
@@ -489,7 +501,7 @@ spawn(function()
         end
     end
 end)
-
+    
 spawn(function()
 game:GetService("RunService").Heartbeat:Connect(function()
     pcall(function()
@@ -511,8 +523,42 @@ game:GetService("RunService").Heartbeat:Connect(function()
     end)
 end)
 end)
-
-
+    
+spawn(function()
+pcall(function()
+    game:GetService("RunService").Stepped:Connect(function()
+        if _G.Teleport_to_Mythic_Island or _G.Teleport_to_Gear or _G.Float or _G.MobAura or _G.Auto_Elite_Hunter or _G.TeleporttoIsland or _G.Auto_Farm_Observation_Haki or _G.AncientOne_Quest then
+            if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
+                local Noclip = Instance.new("BodyVelocity")
+                Noclip.Name = "BodyClip"
+                Noclip.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
+                Noclip.MaxForce = Vector3.new(100000,100000,100000)
+                Noclip.Velocity = Vector3.new(0,0,0)
+            end
+        else	
+            if game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
+                game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip"):Destroy()
+            end
+        end
+    end)
+end)
+end)
+ 
+ 
+ 
+spawn(function()
+pcall(function()
+    game:GetService("RunService").Stepped:Connect(function()
+        if _G.Teleport_to_Mythic_Island or _G.Teleport_to_Gear or _G.Float or _G.MobAura or _G.Auto_Elite_Hunter or _G.TeleporttoIsland or _G.Auto_Farm_Observation_Haki or _G.AncientOne_Quest then
+            for _, v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+                if v:IsA("BasePart") then
+                    v.CanCollide = false    
+                end
+            end
+        end
+    end)
+end)
+end)
 
 function EquipWeapon(ToolSe)
     if not _G.NotAutoEquip then
@@ -523,10 +569,10 @@ function EquipWeapon(ToolSe)
         end
     end
 end
-
+    
 spawn(function()
 game:GetService("RunService").Heartbeat:Connect(function()
-    if _G.MobAura or _G.Teleport_to_Mythic_Island or _G.Teleport_to_Gear or _G.Auto_Elite_Hunter or _G.TeleporttoIsland or _G.Auto_Farm_Observation_Haki then
+    if _G.MobAura or _G.Teleport_to_Mythic_Island or _G.Teleport_to_Gear or _G.Auto_Elite_Hunter or _G.TeleporttoIsland or _G.Auto_Farm_Observation_Haki or _G.AncientOne_Quest then
         if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Humanoid") then
             setfflag("HumanoidParallelRemoveNoPhysics", "False")
             setfflag("HumanoidParallelRemoveNoPhysicsNoSimulate2", "False")
@@ -538,7 +584,7 @@ end)
 
 spawn(function()
 while wait() do
-    if _G.MobAura or _G.Auto_Elite_Hunter then
+    if _G.MobAura or _G.Auto_Elite_Hunter or _G.AncientOne_Quest then
         pcall(function()
             game:GetService("Players").LocalPlayer.Idled:connect(function()
                 game:GetService("VirtualUser"):Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
@@ -550,86 +596,6 @@ while wait() do
 end
 end)
 
-function AutoHaki()
-    if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HasBuso") then
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
-    end
-end
-
-local VirtualInputManager = game:GetService('VirtualInputManager')
-
-spawn(function()
-    while wait() do
-        pcall(function()
-            if _G.AncientOne_Quest then
-                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("UpgradeRace","Buy")
-                if game.Players.LocalPlayer.PlayerGui.Main.RaceEnergy.Fill.BackgroundColor3 == Color3.fromRGB(255, 0 , 0) then
-                    if game:GetService("Workspace").Enemies:FindFirstChild("Reborn Skeleton [Lv. 1975]") or game:GetService("Workspace").Enemies:FindFirstChild("Living Zombie [Lv. 2000]") or game:GetService("Workspace").Enemies:FindFirstChild("Domenic Soul [Lv. 2025]") or game:GetService("Workspace").Enemies:FindFirstChild("Posessed Mummy [Lv. 2050]") then
-    					for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-    						if v.Name == "Reborn Skeleton [Lv. 1975]" or v.Name == "Living Zombie [Lv. 2000]" or v.Name == "Demonic Soul [Lv. 2025]" or v.Name == "Posessed Mummy [Lv. 2050]" then
-    							if v.Humanoid.Health > 0 then
-    								repeat wait()
-    									AutoHaki()
-    									EquipWeapon(_G.Select_Weapon)
-    									v.HumanoidRootPart.CanCollide = false
-    									v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
-    									AncientOneMon = v.HumanoidRootPart.CFrame
-    								    VirtualInputManager:SendKeyEvent(true, "Y", false, game)
-                        				wait()
-                        				VirtualInputManager:SendKeyEvent(false, "Y", false, game)
-    									topos(v.HumanoidRootPart.CFrame * CFrame.new(0,50,0))
-    								until _G.AncientOne_Quest == false or not v.Parent or v.Humanoid.Health <= 0
-    							end
-    						end
-    					end
-    				else
-    					for i,v in pairs(game:GetService("ReplicatedStorage"):GetChildren()) do 
-    						if v.Name == "Reborn Skeleton [Lv. 1975]" then
-    							topos(v.HumanoidRootPart.CFrame * CFrame.new(0,50,0))
-    						elseif v.Name == "Living Zombie [Lv. 2000]" then
-    							topos(v.HumanoidRootPart.CFrame * CFrame.new(0,50,0))
-    						elseif v.Name == "Demonic Soul [Lv. 2025]" then
-    							topos(v.HumanoidRootPart.CFrame * CFrame.new(0,50,0))
-    						elseif v.Name == "Posessed Mummy [Lv. 2050]" then
-    							topos(v.HumanoidRootPart.CFrame * CFrame.new(0,50,0))
-    						end
-    					end
-    					topos(CFrame.new(-9466.72949, 171.162918, 6132.01514))
-    				end
-                else
-    				VirtualInputManager:SendKeyEvent(true, "Y", false, game)
-    				wait()
-    				VirtualInputManager:SendKeyEvent(false, "Y", false, game)
-    				topos(CFrame.new(-9501.73046875, 600.0858154296875, 6034.048828125))
-    			end
-            end
-        end)
-    end
-end)
-
-spawn(function()
-	game:GetService("RunService").Heartbeat:Connect(function()
-		pcall(function()
-			for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-				if _G.AncientOne_Quest and (v.Name == "Reborn Skeleton [Lv. 1975]" or v.Name == "Living Zombie [Lv. 2000]" or v.Name == "Demonic Soul [Lv. 2025]" or v.Name == "Posessed Mummy [Lv. 2050]") and (v.HumanoidRootPart.Position - AncientOneMon.Position).magnitude <= 250 then
-					v.HumanoidRootPart.CFrame = AncientOneMon
-	                v.HumanoidRootPart.CanCollide = false
-                    v.Humanoid.WalkSpeed = 0
-                    v.Humanoid.JumpPower = 0
-                    v.HumanoidRootPart.Locked = true
-                    v.Humanoid:ChangeState(14)
-                    v.Humanoid:ChangeState(11)
-					v.HumanoidRootPart.CanCollide = false
-					v.HumanoidRootPart.Size = Vector3.new(50,50,50)
-					if v.Humanoid:FindFirstChild("Animator") then
-						v.Humanoid.Animator:Destroy()
-					end
-					sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius",  math.huge)
-				end
-			end
-		end)
-	end)
-end)
 
 spawn(function()
 while wait() do
@@ -699,51 +665,169 @@ while wait() do
         end)
     end
 end
-end)
-
-
+end)    
 
 spawn(function()
-while wait() do
-    pcall(function()
-        if _G.Teleport_to_Mythic_Island and game:GetService("Workspace").Map:FindFirstChild("MysticIsland") then
-            for i,v in pairs(game:GetService("Workspace").Map.MysticIsland:GetChildren()) do
-                topos(CFrame.new(game:GetService("Workspace").Map.MysticIsland.PluginGrass.Position))
-            end
-        end
-    end)
-end
-end)   
-
-spawn(function()
-while wait() do
-    pcall(function()
-        if _G.Auto_Press_W then
-            local VirtualInputManager = game:GetService('VirtualInputManager')
-            VirtualInputManager:SendKeyEvent(true, "W", false, game)
-            wait()
-            VirtualInputManager:SendKeyEvent(false, "W", false, game)
-        end
-    end)
-end
-end)
-
-spawn(function()
-while wait() do
-    pcall(function()
-        if _G.Teleport_to_Gear then
-            for i,v in pairs(game:GetService("Workspace").Map.MysticIsland:GetChildren()) do
-                if v.Name == "Part" then
-                    if v.ClassName == "MeshPart" then
-                        topos(CFrame.new(v.Position))
-                    end	
+    while wait() do
+        pcall(function()
+            if _G.Teleport_to_Mythic_Island and game:GetService("Workspace").Map:FindFirstChild("MysticIsland") then
+                for i,v in pairs(game:GetService("Workspace").Map.MysticIsland:GetChildren()) do
+                    topos(CFrame.new(game:GetService("Workspace").Map.MysticIsland.PluginGrass.Position))
                 end
             end
-        end
+        end)
+    end
+    end)   
+    
+
+    
+    spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.Teleport_to_Gear then
+                for i,v in pairs(game:GetService("Workspace").Map.MysticIsland:GetChildren()) do
+                    if v.Name == "Part" then
+                        if v.ClassName == "MeshPart" then
+                            topos(CFrame.new(v.Position))
+                        end	
+                    end
+                end
+            end
+        end)
+    end
     end)
+
+
+
+
+
+function AutoHaki()
+    if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HasBuso") then
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
+    end
 end
+
+local VirtualInputManager = game:GetService('VirtualInputManager')
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.AncientOne_Quest then
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("UpgradeRace","Buy")
+                if game.Players.LocalPlayer.PlayerGui.Main.RaceEnergy.Fill.BackgroundColor3 == Color3.fromRGB(255, 0 , 0) or not game.Players.LocalPlayer.PlayerGui.TransformationHUD.ImageLabel.Visible then
+                    if game:GetService("Workspace").Enemies:FindFirstChild("Reborn Skeleton [Lv. 1975]") or game:GetService("Workspace").Enemies:FindFirstChild("Living Zombie [Lv. 2000]") or game:GetService("Workspace").Enemies:FindFirstChild("Domenic Soul [Lv. 2025]") or game:GetService("Workspace").Enemies:FindFirstChild("Posessed Mummy [Lv. 2050]") then
+    					for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+    						if v.Name == "Reborn Skeleton [Lv. 1975]" or v.Name == "Living Zombie [Lv. 2000]" or v.Name == "Demonic Soul [Lv. 2025]" or v.Name == "Posessed Mummy [Lv. 2050]" then
+    							if v.Humanoid.Health > 0 then
+    								repeat wait()
+    									AutoHaki()
+    									EquipWeapon(_G.Select_Weapon)
+    									v.HumanoidRootPart.CanCollide = false
+    									v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+    									AncientOneMon = v.HumanoidRootPart.CFrame
+    								    VirtualInputManager:SendKeyEvent(true, "Y", false, game)
+                        				wait()
+                        				VirtualInputManager:SendKeyEvent(false, "Y", false, game)
+    									topos(v.HumanoidRootPart.CFrame * CFrame.new(0,50,0))
+    								until _G.AncientOne_Quest == false or not v.Parent or v.Humanoid.Health <= 0
+    							end
+    						end
+    					end
+    				else
+    					for i,v in pairs(game:GetService("ReplicatedStorage"):GetChildren()) do 
+    						if v.Name == "Reborn Skeleton [Lv. 1975]" then
+    							topos(v.HumanoidRootPart.CFrame * CFrame.new(0,50,0))
+    						elseif v.Name == "Living Zombie [Lv. 2000]" then
+    							topos(v.HumanoidRootPart.CFrame * CFrame.new(0,50,0))
+    						elseif v.Name == "Demonic Soul [Lv. 2025]" then
+    							topos(v.HumanoidRootPart.CFrame * CFrame.new(0,50,0))
+    						elseif v.Name == "Posessed Mummy [Lv. 2050]" then
+    							topos(v.HumanoidRootPart.CFrame * CFrame.new(0,50,0))
+    						end
+    					end
+    					topos(CFrame.new(-9466.72949, 171.162918, 6132.01514))
+    				end
+                else
+    				VirtualInputManager:SendKeyEvent(true, "Y", false, game)
+    				wait()
+    				VirtualInputManager:SendKeyEvent(false, "Y", false, game)
+    				topos(CFrame.new(-9501.73046875, 600.0858154296875, 6034.048828125))
+    			end
+            end
+        end)
+    end
 end)
 
+spawn(function()
+	game:GetService("RunService").Heartbeat:Connect(function()
+		pcall(function()
+			for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+				if _G.AncientOne_Quest and (v.Name == "Reborn Skeleton [Lv. 1975]" or v.Name == "Living Zombie [Lv. 2000]" or v.Name == "Demonic Soul [Lv. 2025]" or v.Name == "Posessed Mummy [Lv. 2050]") and (v.HumanoidRootPart.Position - AncientOneMon.Position).magnitude <= 250 then
+					v.HumanoidRootPart.CFrame = AncientOneMon
+	                v.HumanoidRootPart.CanCollide = false
+                    v.Humanoid.WalkSpeed = 0
+                    v.Humanoid.JumpPower = 0
+                    v.HumanoidRootPart.Locked = true
+                    v.Humanoid:ChangeState(14)
+                    v.Humanoid:ChangeState(11)
+					v.HumanoidRootPart.CanCollide = false
+					v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+					if v.Humanoid:FindFirstChild("Animator") then
+						v.Humanoid.Animator:Destroy()
+					end
+					sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius",  math.huge)
+				end
+			end
+		end)
+	end)
+end)
+
+
+
+function Moon()
+    pcall(function()
+        if game:GetService("Players").localPlayer.PlayerGui.ScreenGui:FindFirstChild("Moon") then
+            game:GetService("Players").localPlayer.PlayerGui.ScreenGui.Moon:Destroy()
+        end
+    local Moon = Instance.new("ImageLabel")
+        Moon.Parent = game:GetService("Players").localPlayer.PlayerGui.ScreenGui
+        Moon.Name = "Moon"
+        Moon.Size = UDim2.new(0.100, 0,0.18, 0)
+        Moon.Position = UDim2.new(0, 0,0.05, 0)
+        Moon.Rotation = 180
+        Moon.Image = game:GetService("Lighting").Sky.MoonTextureId
+    end)
+end
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if not _G.Moon then
+                if game:GetService("Players").localPlayer.PlayerGui.ScreenGui:FindFirstChild("Moon") then
+                    game:GetService("Players").localPlayer.PlayerGui.ScreenGui.Moon:Destroy()
+                end
+            end
+        end)        
+    end
+end)
+
+
+
+------Menu--------
+local MobTab = Window:MakeTab({
+	Name = "Kill Mob",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+
+MobTab:AddToggle({
+	Name = "MobAura",
+	Default = false,
+	Callback = function(Value)
+		_G.MobAura = Value
+	end    
+})
 
 local Tab = Window:MakeTab({
 	Name = "🔥RACE V4",
@@ -892,7 +976,7 @@ Tab:AddToggle({
 	Name = "NoClip",
 	Default = false,
 	Callback = function(Value)
-		_G.NoClip = (Value)
+		_G.NoClip = Value
         
 	end    
 })
@@ -1056,14 +1140,6 @@ Tab:AddToggle({
 })
 
 
-Tab:AddToggle({
-	Name = "Press W",
-	Default = false,
-	Callback = function(Value)
-		_G.Auto_Press_W = value
-	end    
-})
-
 
 Tab:AddToggle({
 	Name = "Teleport to Gear",
@@ -1072,8 +1148,6 @@ Tab:AddToggle({
 		_G.Teleport_to_Gear = value
 	end    
 })
-
-
 
 
 OrionLib:Init()
