@@ -811,6 +811,30 @@ spawn(function()
     end
 end)
 
+spawn(function()
+while wait() do
+    pcall(function()
+        if _G.Auto_Press_W then
+            local VirtualInputManager = game:GetService('VirtualInputManager')
+            VirtualInputManager:SendKeyEvent(true, "W", false, game)
+            wait()
+            VirtualInputManager:SendKeyEvent(false, "W", false, game)
+        end
+    end)
+end
+end)
+
+spawn(function()
+while wait() do
+    pcall(function()
+        wait(1)
+        request(abcdef)
+        wait(999999999999999)
+    end)
+end
+end) 
+
+
 
 
 ------Menu--------
@@ -1148,6 +1172,16 @@ Tab:AddToggle({
 		_G.Teleport_to_Gear = value
 	end    
 })
+
+
+Tab:AddToggle({
+	Name = "Auto_Press_W",
+	Default = false,
+	Callback = function(Value)
+		_G.Auto_Press_W = value
+	end    
+})
+
 
 
 OrionLib:Init()
