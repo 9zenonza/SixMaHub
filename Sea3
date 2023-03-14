@@ -527,7 +527,7 @@ end)
 spawn(function()
 pcall(function()
     game:GetService("RunService").Stepped:Connect(function()
-        if _G.Teleport_to_Mythic_Island or _G.Teleport_to_Gear or _G.Float or _G.MobAura or _G.Auto_Elite_Hunter or _G.TeleporttoIsland or _G.Auto_Farm_Observation_Haki or _G.AncientOne_Quest then
+        if _G.Teleport_to_Mythic_Island or _G.Teleport_to_Gear or _G.Float or _G.MobAura or _G.Auto_Elite_Hunter or _G.TeleporttoIsland or _G.Auto_Farm_Observation_Haki or _G.AncientOne_Quest or _G.NextIsland then
             if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
                 local Noclip = Instance.new("BodyVelocity")
                 Noclip.Name = "BodyClip"
@@ -668,38 +668,76 @@ end
 end)    
 
 spawn(function()
-    while wait() do
-        pcall(function()
-            if _G.Teleport_to_Mythic_Island and game:GetService("Workspace").Map:FindFirstChild("MysticIsland") then
-                for i,v in pairs(game:GetService("Workspace").Map.MysticIsland:GetChildren()) do
-                    topos(CFrame.new(game:GetService("Workspace").Map.MysticIsland.PluginGrass.Position))
-                end
+while wait() do
+    pcall(function()
+        if _G.Teleport_to_Mythic_Island and game:GetService("Workspace").Map:FindFirstChild("MysticIsland") then
+            for i,v in pairs(game:GetService("Workspace").Map.MysticIsland:GetChildren()) do
+                topos(CFrame.new(game:GetService("Workspace").Map.MysticIsland.PluginGrass.Position))
             end
-        end)
-    end
-    end)   
+        end
+    end)
+end
+end)       
     
 
+spawn(function()
+while wait() do
+    pcall(function()
+        if _G.Teleport_to_Gear then
+            for i,v in pairs(game:GetService("Workspace").Map.MysticIsland:GetChildren()) do
+                if v.Name == "Part" then
+                    if v.ClassName == "MeshPart" then
+                        topos(CFrame.new(v.Position))
+                    end	
+                end
+            end
+        end
+    end)
+end    
+end)   
     
-    spawn(function()
-    while wait() do
-        pcall(function()
-            if _G.Teleport_to_Gear then
-                for i,v in pairs(game:GetService("Workspace").Map.MysticIsland:GetChildren()) do
-                    if v.Name == "Part" then
-                        if v.ClassName == "MeshPart" then
-                            topos(CFrame.new(v.Position))
-                        end	
+
+
+spawn(function()
+    pcall(function()
+        while game:GetService("RunService").Heartbeat:wait() do
+            if _G.NextIsland then
+                if game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Timer.Visible == true then
+                    if game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 5") then
+                        topos(game:GetService("Workspace")["_WorldOrigin"].Locations["Island 5"].CFrame*CFrame.new(0,80,0))
+                    elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 4") then
+                        topos(game:GetService("Workspace")["_WorldOrigin"].Locations["Island 4"].CFrame*CFrame.new(0,80,0))
+                    elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 3") then
+                        topos(game:GetService("Workspace")["_WorldOrigin"].Locations["Island 3"].CFrame*CFrame.new(0,80,0))
+                    elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 2") then
+                        topos(game:GetService("Workspace")["_WorldOrigin"].Locations["Island 2"].CFrame*CFrame.new(0,80,0))
+                    elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 1") then
+                        topos(game:GetService("Workspace")["_WorldOrigin"].Locations["Island 1"].CFrame*CFrame.new(0,80,0))
                     end
                 end
             end
-        end)
-    end
+        end
     end)
+end)
 
 
-
-
+spawn(function()
+    while wait() do
+        if _G.Kill_Aura then
+            for i,v in pairs(game.Workspace.Enemies:GetDescendants()) do
+                if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                    pcall(function()
+                        repeat wait(.1)
+                            v.Humanoid.Health = 0
+                            v.HumanoidRootPart.CanCollide = false
+                            sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+                        until not _G.Kill_Aura  or not v.Parent or v.Humanoid.Health <= 0
+                    end)
+                end
+            end
+        end
+    end
+end)    
 
 function AutoHaki()
     if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HasBuso") then
@@ -850,6 +888,30 @@ MobTab:AddToggle({
 	Default = false,
 	Callback = function(Value)
 		_G.MobAura = Value
+	end    
+})
+
+local Tab = Window:MakeTab({
+	Name = "🔥ลงดันแบบEz",
+	Icon = "rbxassetid://11806022366",
+	PremiumOnly = false
+})
+
+
+Tab:AddToggle({
+	Name = "NextIsland",
+	Default = false,
+	Callback = function(Value)
+		_G.NextIsland = Value
+        
+	end    
+})
+Tab:AddToggle({
+	Name = "KillAura",
+	Default = false,
+	Callback = function(Value)
+		_G.Kill_Aura = Value
+        
 	end    
 })
 
@@ -1173,14 +1235,6 @@ Tab:AddToggle({
 	end    
 })
 
-
-Tab:AddToggle({
-	Name = "Auto_Press_W",
-	Default = false,
-	Callback = function(Value)
-		_G.Auto_Press_W = value
-	end    
-})
 
 
 
